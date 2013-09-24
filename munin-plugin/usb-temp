@@ -1,0 +1,31 @@
+#!/bin/sh
+
+#%# family=auto
+#%# capabilities=autoconf
+
+GETNUM=`/usr/local/bin/usb-temp.sh`
+
+if [ "$1" = "autoconf" ]; then
+        if [ -n ${GETNUM} ] ; then
+                echo yes
+                exit 0
+        else
+                echo no
+                exit 0
+        fi
+fi
+
+if [ "$1" = "config" ]; then
+        echo 'graph_title room temp'
+        echo 'graph_args -r --lower-limit -20 --upper-limit 50'
+        echo 'graph_vlabel temp'
+        echo 'graph_category room'
+        echo 'temp.label temp'
+        echo 'temp.min -20'
+        echo 'temp.max 50'
+        echo 'temp.draw LINE3'
+        echo 'temp.type GAUGE'
+        exit 0
+fi
+
+echo "temp.value $GETNUM";

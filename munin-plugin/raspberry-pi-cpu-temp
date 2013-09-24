@@ -1,0 +1,31 @@
+#!/bin/sh
+
+#%# family=auto
+#%# capabilities=autoconf
+
+GETNUM=`/usr/local/bin/cpu-temp.sh`
+
+if [ "$1" = "autoconf" ]; then
+        if [ -n ${GETNUM} ] ; then
+                echo yes
+                exit 0
+        else
+                echo no
+                exit 0
+        fi
+fi
+
+if [ "$1" = "config" ]; then
+        echo 'graph_title cpu temp'
+        echo 'graph_args -r --lower-limit 0 --upper-limit 100'
+        echo 'graph_vlabel temp'
+        echo 'graph_category cpu'
+        echo 'temp.label temp'
+        echo 'temp.min 0'
+        echo 'temp.max 100'
+        echo 'temp.draw LINE3'
+        echo 'temp.type GAUGE'
+        exit 0
+fi
+
+echo "temp.value $GETNUM";
