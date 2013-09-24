@@ -21,6 +21,8 @@ if [ "$1" = "config" ]; then
         echo 'graph_vlabel temp'
         echo 'graph_category room'
         echo 'temp.label temp'
+        echo 'temp.warning 32'
+        echo 'temp.critical 35' 
         echo 'temp.min -20'
         echo 'temp.max 50'
         echo 'temp.draw LINE3'
